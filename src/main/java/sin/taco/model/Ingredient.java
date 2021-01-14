@@ -1,4 +1,4 @@
-package sin.taco;
+package sin.taco.model;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

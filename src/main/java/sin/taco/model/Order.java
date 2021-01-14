@@ -1,4 +1,4 @@
-package sin.taco;
+package sin.taco.model;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
@@ -6,9 +6,12 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.Date;
 
 @Data
 public class Order {
+
+  private Long id;
 
   @NotBlank(message = "Name is required")
   private String name;
@@ -35,5 +38,7 @@ public class Order {
 
   @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
   private String ccCVV;
+
+  private Date createdAt;
 
 }
