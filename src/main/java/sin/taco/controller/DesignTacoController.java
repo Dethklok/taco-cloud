@@ -5,20 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.web.bind.annotation.SessionAttributes;
 import sin.taco.model.Ingredient;
 import sin.taco.model.Ingredient.Type;
+import sin.taco.model.Order;
 import sin.taco.model.Taco;
 import sin.taco.repository.IngredientRepository;
+import sin.taco.repository.TacoRepository;
 
 import javax.validation.Valid;
 
@@ -30,9 +28,12 @@ public class DesignTacoController {
 
   private final IngredientRepository ingredientRepository;
 
+  private final TacoRepository tacoRepository;
+
   @Autowired
-  public DesignTacoController(IngredientRepository ingredientRepository) {
+  public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
     this.ingredientRepository = ingredientRepository;
+    this.tacoRepository = tacoRepository;
   }
 
   @GetMapping
@@ -47,18 +48,30 @@ public class DesignTacoController {
       model.addAttribute(type.toString().toLowerCase(), ingredientsByType);
     }
 
-    model.addAttribute("design", new Taco());
+    model.addAttribute("taco", new Taco());
 
     return "design";
   }
 
+  @ModelAttribute(name = "order")
+  public Order order() {
+    return new Order();
+  }
+
+  @ModelAttribute(name = "taco")
+  public Taco taco() {
+    return new Taco();
+  }
+
   @PostMapping
-  public String processDesign(@Valid Taco taco, Errors errors) {
+  public String processDesign(@Valid Taco taco, Errors errors, @ModelAttribute Order order) {
     if (errors.hasErrors()) {
+      errors.getAllErrors().forEach(objectError -> log.info(objectError.toString()));
       return "design";
     }
 
-    log.info("Processing design: " + taco);
+    Taco saved = tacoRepository.save(taco);
+    order.addTaco(saved);
     return "redirect:/orders/current";
   }
 }

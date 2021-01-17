@@ -6,7 +6,9 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Order {
@@ -28,7 +30,6 @@ public class Order {
   @NotBlank(message = "Zip code is required")
   private String zip;
 
-
   @CreditCardNumber(message = "Not a valid credit card number")
   private String ccNumber;
 
@@ -41,4 +42,13 @@ public class Order {
 
   private Date createdAt;
 
+  private List<Taco> tacos = new ArrayList<>();
+
+  public void addTaco(Taco saved) {
+    tacos.add(saved);
+  }
+
+  public List<Taco> getTacos() {
+    return tacos;
+  }
 }
