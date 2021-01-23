@@ -2,6 +2,8 @@ package sin.taco.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,5 +51,14 @@ public class OrderController {
     sessionStatus.setComplete();
 
     return "redirect:/";
+  }
+
+  @GetMapping
+  public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
+    Pageable pageable = PageRequest.of(0, 20);
+    model.addAttribute("orders",
+      orderRepository.findByUserOrderByCreatedAtDesc(user, pageable));
+
+    return "orderList";
   }
 }
