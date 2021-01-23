@@ -1,0 +1,14 @@
+server:
+  port: 8443
+
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost/tacocloud
+#    username: tacodb
+#    password: tacopassword
+#    driver-class-name: com.mysql.jdbc.Driver
+#    schema:
+#      - order-schema.sql
+#      - ingredient-schema.sql
+#    data:
+#      - ingredients.sql
