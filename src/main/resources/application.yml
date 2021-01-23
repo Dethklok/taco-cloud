@@ -1,5 +1,10 @@
 server:
   port: 8443
+  ssl:
+    key-store: classpath:mykeys.jks
+    key-store-password: tacocloud
+    key-password: tacocloud
+
 
 #spring:
 #  datasource:
