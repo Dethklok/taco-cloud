@@ -6,6 +6,11 @@
 	<groupId>sia</groupId>
 	<artifactId>taco-cloud-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<modules>
+		<module>tacocloud-data</module>
+		<module>tacocloud-domain</module>
+        <module>tacocloud-ui</module>
+    </modules>
 	<packaging>pom</packaging>
 
 	<parent>
@@ -16,6 +21,8 @@
 	</parent>
 
 	<properties>
+		<maven.compiler.source>15</maven.compiler.source>
+		<maven.compiler.target>15</maven.compiler.target>
         <tacocloud.version>${project.version}</tacocloud.version>
 	</properties>
 
