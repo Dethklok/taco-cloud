@@ -12,6 +12,9 @@
     <artifactId>tacocloud-domain</artifactId>
     <packaging>jar</packaging>
 
+    <name>tacocloud-domain</name>
+    <description>Taco Cloud Domain</description>
+
     <properties>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
