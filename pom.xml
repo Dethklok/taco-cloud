@@ -10,7 +10,8 @@
 		<module>tacocloud-data</module>
 		<module>tacocloud-domain</module>
         <module>tacocloud-ui</module>
-    </modules>
+    <module>tacocloud-security</module>
+  </modules>
 	<packaging>pom</packaging>
 
 	<parent>
